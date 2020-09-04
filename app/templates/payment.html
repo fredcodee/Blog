@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment checkout</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</head>
+<body>
+  <h1>payment</h1>
+  <p>$10 one time payment</p>
+  <button type="submit" id="submitBtn">Subscribe</button>
+</body>
+</html>

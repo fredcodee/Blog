@@ -22,6 +22,8 @@ class RegisterForm(FlaskForm):
   name = StringField('Full Name', validators=[InputRequired(), Length(min=4)])
   password = PasswordField('Password', validators=[
                            InputRequired(), Length(min=4, max=80)])
+  role = SelectField('Role', choices=[(
+      'Author', 'Author'), ('Subscriber', 'Subscriber'), ('Demo', 'Demo')], validators=[InputRequired()])
   submit = SubmitField('Register')
 
 
@@ -49,7 +51,7 @@ def signup():
       hashed_password = generate_password_hash(
           form.password.data, method='sha256')
       u_name = form.name.data
-      new_user = User(name=u_name.title(), email=form.email.data, password=hashed_password)
+      new_user = User(name=u_name.title(), email=form.email.data, role=form.role.data, password=hashed_password)
       db.session.add(new_user)
       db.session.commit()
       return redirect(url_for('forms.login'))

@@ -6,7 +6,8 @@
   <title>blog</title>
 </head>
 <body>
-  <a href="#">subscribe</a>
+  {% block content %}
+  <a href="/payment">subscribe</a>
   <a href="/login">Login</a>
   <h1>myblog</h1>
   <div>
@@ -25,5 +26,6 @@
         Ipsam debitis id fuga dolores deleniti, necessitatibus omnis esse quos, atque rerum accusamus eos.</p>
     </div>
   </div>
+  {% endblock %}
 </body>
 </html>
