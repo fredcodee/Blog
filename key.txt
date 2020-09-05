@@ -3,3 +3,7 @@ pk_test_51HMfihKZXGIOAX0RySSyQ9U4BduK4lgWYka31u02pvrSAqKk0OLtzgJ9CxjH2yQLTKHK1dZ
 
 Secret key
 sk_test_51HMfihKZXGIOAX0RFNz6yGAb9VXU9cRpv1bkIxjpRjLs8NZvXg14mAYRi3E5pbqryteqdPWuKNz2Z4DLzT1zBBLq004t4Ao7Ws
+
+
+endpoint key
+whsec_AlCZzWqV9PIPWpwnpFYT7snN5EmrSHfJ
