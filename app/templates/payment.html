@@ -5,11 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment checkout</title>
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="{{ url_for('static', filename='main.js') }}"></script>
+  
 </head>
 <body>
-  <h1>payment</h1>
-  <p>$10 one time payment</p>
-  <button type="submit" id="submitBtn">Subscribe</button>
+  <div>
+    <h1  id="demo">Payment</h1>
+    <p>$50 / yearly</p>
+    <a href="#" class="submitBtn" data-subcriber="yearly">Subscribe</a>
+    <h1>payment</h1>
+    <p>$5 / Monthly</p>
+    <a href="#" class="submitBtn" data-subcriber="monthly">Subscribe</a>
+  </div> 
+
+  <script src="{{ url_for('static', filename='stripe.js') }}"></script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>

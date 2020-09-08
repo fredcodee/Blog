@@ -29,19 +29,27 @@ def get_publishable_key():
   stripe_config = {"publicKey": stripe_keys["publishable_key"]}
   return jsonify(stripe_config)
 
-#checkout session
-@main.route("/create-checkout-session")
-def create_checkout_session():
+#checkout session for subscribers
+@main.route("/create-checkout-session/<plan>", methods=["GET", "POST"])
+def create_checkout_session(plan):
   stripe.api_key = stripe_keys["secret_key"]
 
   try:
+    #product rprice subcription id from stripe
+    if plan and plan == 'yearly':
+      plan = 'price_1HNjoDKZXGIOAX0RoZ2yYg7d'
+    elif plan and plan == 'monthly':
+      plan = 'price_1HO7guKZXGIOAX0RmSP5D0KE'
+
     checkout_session = stripe.checkout.Session.create(
       success_url=url_for('main.success', _external=True) +'?session_id={CHECKOUT_SESSION_ID}',
       cancel_url=url_for('main.home', _external=True),
       payment_method_types=["card"],
-      mode="payment",
-      line_items=[{"name": "premium plan", "quantity": 1,
-                   "currency": "usd", "amount": "1000", }]
+      mode='subscription',
+      line_items=[{
+          'price': plan,
+          'quantity': 1,
+      }]
     )
     return jsonify({"sessionId": checkout_session["id"]})
   except Exception as e:
@@ -55,9 +63,8 @@ def success():
 def cancelled():
   return render_template("cancelled.html")
 
+
 #stripe webhook
-
-
 @main.route("/webhook", methods=["POST"])
 def stripe_webhook():
   payload = request.get_data(as_text=True)

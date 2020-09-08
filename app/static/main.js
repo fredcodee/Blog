@@ -1,25 +1,12 @@
-console.log("Sanity check!");
+/*console.log('main connected');
+var paymentSelect = document.getElementsByClassName("submitBtn");
 
-// Get Stripe publishable key
-fetch("/config")
-  .then((result) => { return result.json(); })
-  .then((data) => {
-    // Initialize Stripe.js
-    const stripe = Stripe(data.publicKey);
-  
+function event(){
+  var subPlan = this.dataset.subcriber;
+  console.log(subPlan);
+}
 
-    // Event handler
-    document.querySelector("#submitBtn").addEventListener("click", () => {
-      // Get Checkout Session ID
-      fetch("/create-checkout-session")
-        .then((result) => { return result.json(); })
-        .then((data) => {
-          console.log(data);
-          // Redirect to Stripe Checkout
-          return stripe.redirectToCheckout({ sessionId: data.sessionId })
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    });
-  });
+for (var i = 0; i < paymentSelect.length; i++) {
+  paymentSelect[i].addEventListener('click', event, false);
+}*/
+
