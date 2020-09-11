@@ -17,4 +17,6 @@ class Blogpost(db.Model):
   subtitle = db.Column(db.String(100))
   author = db.Column(db.String(20))
   date_posted = db.Column(db.DateTime)
-  content = db.Column(db.Text)
+  content = db.Column(db.Text,  nullable=False)
+  access = db.Column(db.Boolean,  nullable = False)
+  imagelink = db.Column(db.String(100))

@@ -89,5 +89,16 @@ def stripe_webhook():
 
 
 
+#addnew article
+@main.route("/new", methods=["POST","GET"])
+def new():
+  pass
 
+
+#notification
+#search articles
+#bookmarked articles
+#view profile and payment detials
+#about me
+#admin page
 
