@@ -122,11 +122,11 @@ def new():
   else:
     abort(404)
 
-#search articles
-#bookmarked articles
 #likes
 #comments
 #social media share
+#search articles
+#bookmarked articles
 #notificaation
 #view profile and payment detials
 #cancel/change payments
