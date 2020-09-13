@@ -122,15 +122,22 @@ def new():
   else:
     abort(404)
 
+#blogpost page
+@main.route("/blog/<idd>")
+def blog(idd):
+  get_blog = Blogpost.query.get(int(idd))
+  return render_template("article.html", blog = get_blog)
 #likes
 #comments
 #social media share
+
+
 #search articles
 #bookmarked articles
 #notificaation
 #view profile and payment detials
 #cancel/change payments
 #about me
-#admin page
+#admin page(delete post, user or add user and view users)
 #connect stripehook
 

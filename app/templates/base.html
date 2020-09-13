@@ -15,7 +15,9 @@
   {%else%}
     {% if current_user.role == 'Author'%}
     <a href="/new">Add article</a>
+    <a href="#">Admin panel</a>
     {% endif %}
+    <a href="#">Bookmarks</a>
     <a href="#">{{current_user.name}}</a>
     <a href="/logout">Logout</a>
   {%endif%}
@@ -30,13 +32,15 @@
     {% endwith %}
     <div class="articles">
       {%for article in articles %}
-        <div>
-          <img src="{{article.imagelink}}" alt="blog image">
-          <h1>{{article.title}}</h1>
-          <small>{{article.date}}</small>
-          <small>by {{article.author}}</small>
-          <p>{{article.subtitle}}</p>
-        </div>
+        <a href="/blog/{{article.id}}">
+            <div>
+              <img src="{{article.imagelink}}" alt="blog image">
+              <h1>{{article.title}}</h1>
+              <small>{{article.date}}</small>
+              <small>by {{article.author}}</small>
+              <p>{{article.subtitle}}</p>
+           </div>
+        </a>
         <hr>
       {%endfor%}
     </div>
