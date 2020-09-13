@@ -23,8 +23,22 @@
       {{blog.content}}
     </div>
   </div>
+  <div>
+    <p>likes : {{likes}}</p>
+  </div>
   <div class="comments">
-    
+    <a href="/likes/{{blog.id}}"><button>Like</button></a>
+    <div>
+      <form action="/comment" method="POST">
+        <input type="text" placeholder="Add to the discussion" name="comment">
+      </form>
+    </div>
+  </div>
+  <div>
+    <h3>discussion</h3>
+    {%for comments in discussion%}
+      <p>{{comments.detials}}</p>
+    {%endfor%}
   </div>
   
 </body>

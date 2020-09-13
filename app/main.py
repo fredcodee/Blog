@@ -1,6 +1,6 @@
 import stripe
 from flask import Blueprint, redirect, render_template, request, flash, url_for, abort, jsonify
-from app.models import User, Blogpost
+from app.models import User, Blogpost, Likes,Comment
 #from app.forms import 
 from app import db
 from flask_login import login_required, current_user
@@ -126,14 +126,35 @@ def new():
 @main.route("/blog/<idd>")
 def blog(idd):
   get_blog = Blogpost.query.get(int(idd))
-  return render_template("article.html", blog = get_blog)
+  likes = Likes.query.filter(Likes.blogpost_likes.has(id=int(idd))).all()
+  comments = Comment.query.filter(Comment.blogpost_comments.has(id=int(idd)))
+  return render_template("article.html", blog = get_blog , comments = comments, likes = len(likes))
+
 #likes
+@main.route("/likes/<idd>")
+@login_required
+def likes(idd):
+  #check if user has like before
+  check_user = Likes.query.filter(Likes.blogpost_likes.has(id=int(idd)))
+  for user in check_user:
+    if user.user_likes.name == current_user.name:
+      return redirect(url_for("main.blog", idd = idd))
+   
+  get_blog = Blogpost.query.get(int(idd))
+  new_like = Likes(user_likes=current_user, blogpost_likes = get_blog)
+
+  db.session.add(new_like)
+  db.session.commit()
+  flash("post liked!")
+  return redirect(url_for("main.blog", idd=idd))
+
 #comments
+#bookmark
 #social media share
 
 
-#search articles
 #bookmarked articles
+# #search articles
 #notificaation
 #view profile and payment detials
 #cancel/change payments
