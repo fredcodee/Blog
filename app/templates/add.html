@@ -6,7 +6,32 @@
   <title>New Article</title>
 </head>
 <body>
+  <div><a href="/">home</a></div>
   <div>
+    <form action="/new" method="POST">
+      <fieldset>
+        <label for="coverimage">Add a Cover Image</label>
+        <input type="text" name="coverimage" id="coverimage" placeholder="paste your image link here">
+      </fieldset>
+      <fieldset>
+        <div><input type="text" name="title" placeholder="New Post Title Here..." required>
+        </div>
+        <div><input type="text" name="content" placeholder="Write your post content here..." required>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div>
+          <label for="access">Choose viewers</label>
+          <select name="access" id="access" required>
+            <option value="T">All</option>
+            <option value="F">Subscribers</option>
+          </select>
+        </div>
+      </fieldset>
+      <div>
+        <button type="submit">Publish</button>
+      </div>
+    </form>
 
   </div>
   

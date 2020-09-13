@@ -1,6 +1,6 @@
 import stripe
 from flask import Blueprint, redirect, render_template, request, flash, url_for, abort, jsonify
-from app.models import User
+from app.models import User, Blogpost
 #from app.forms import 
 from app import db
 from flask_login import login_required, current_user
@@ -89,16 +89,47 @@ def stripe_webhook():
 
 
 
-#addnew article
+#addnew article (Author&editor)
 @main.route("/new", methods=["POST","GET"])
+@login_required
 def new():
-  pass
+  if current_user.role != "Subscriber":
+    if request.method == 'POST':
+      title = request.form.get("title")
+      author = current_user.name
+      content = request.form.get("content")
+      imagelink = request.form.get("coverimage")
+      subtitle =  content[:200]
+      #post access
+      access = request.form.get("access")
+      if access == "T":
+        access = True
+      elif access == "F":
+        access = False
 
+      #save to database
+      new_post = Blogpost(title=title, subtitle =subtitle,author=current_user.name,content = content, access = access,imagelink = imagelink)
 
-#notification
+      db.session.add(new_post)
+      db.session.commit()
+
+      flash("New Post added")
+      return redirect(url_for("main.home"))
+
+    else:
+      return render_template('add.html')
+  else:
+    abort(404)
+
 #search articles
 #bookmarked articles
+#likes
+#comments
+#social media share
+#notificaation
 #view profile and payment detials
+#cancel/change payments
 #about me
 #admin page
+#connect stripehook
 
