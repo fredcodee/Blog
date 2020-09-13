@@ -21,20 +21,26 @@
   {%endif%}
   <h1>myblog</h1>
   <div>
-    <div>
-      <h1>title</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente facere amet error, quaerat quia asperiores vitae. Ipsam debitis id fuga dolores deleniti, necessitatibus omnis esse quos, atque rerum accusamus eos.</p>
+    {% with messages = get_flashed_messages() %}
+    {% if messages%}
+    <div class="alert alert-danger" role="alert">
+      {{ messages[0] }}
     </div>
-    <div>
-      <h1>title</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente facere amet error, quaerat quia asperiores vitae.
-        Ipsam debitis id fuga dolores deleniti, necessitatibus omnis esse quos, atque rerum accusamus eos.</p>
+    {%endif%}
+    {% endwith %}
+    <div class="articles">
+      {%for article in articles %}
+        <div>
+          <img src="{{article.imagelink}}" alt="blog image">
+          <h1>{{article.title}}</h1>
+          <small>{{article.date_posted}}</small>
+          <small>by {{article.author}}</small>
+          <p>{{article.subtitle}}</p>
+        </div>
+        <hr>
+      {%endfor%}
     </div>
-    <div>
-      <h1>title</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente facere amet error, quaerat quia asperiores vitae.
-        Ipsam debitis id fuga dolores deleniti, necessitatibus omnis esse quos, atque rerum accusamus eos.</p>
-    </div>
+   
   </div>
   {% endblock %}
 </body>

@@ -19,12 +19,12 @@ class Blogpost(db.Model):
   __tablename__ = 'blogpost'
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(50))
-  subtitle = db.Column(db.String(200))
+  subtitle = db.Column(db.String(250))
   author = db.Column(db.String(20))
   date_posted = db.Column(db.DateTime)
   content = db.Column(db.Text,  nullable=False)
   access = db.Column(db.Boolean,  nullable = False)
-  imagelink = db.Column(db.String(100))
+  imagelink = db.Column(db.String(500))
   comments = db.relationship(
       'Comment', backref='blogpost_comments', cascade="all,delete", lazy='dynamic')
   likes = db.relationship(

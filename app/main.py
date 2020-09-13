@@ -16,7 +16,9 @@ main = Blueprint('main', __name__)
 
 @main.route("/")
 def home():
-  return render_template("base.html")
+  #get articles
+  articles = Blogpost.query.all()
+  return render_template("base.html", articles = articles)
 
 
 @main.route("/payment")
@@ -96,7 +98,6 @@ def new():
   if current_user.role != "Subscriber":
     if request.method == 'POST':
       title = request.form.get("title")
-      author = current_user.name
       content = request.form.get("content")
       imagelink = request.form.get("coverimage")
       subtitle =  content[:200]
@@ -105,7 +106,7 @@ def new():
       if access == "T":
         access = True
       elif access == "F":
-        access = False
+        access = False 
 
       #save to database
       new_post = Blogpost(title=title, subtitle =subtitle,author=current_user.name,content = content, access = access,imagelink = imagelink)
