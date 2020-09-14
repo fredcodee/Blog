@@ -29,7 +29,7 @@
   <div class="comments">
     <a href="/likes/{{blog.id}}"><button>Like</button></a>
     <div>
-      <form action="/comment" method="POST">
+      <form action="/comments/{{blog.id}}" method="POST">
         <input type="text" placeholder="Add to the discussion" name="comment">
       </form>
     </div>
@@ -37,7 +37,9 @@
   <div>
     <h3>discussion</h3>
     {%for comments in discussion%}
-      <p>{{comments.detials}}</p>
+      <p>{{comments.details}}</p>
+      <small>{{comments.user_comment.name}}</small>
+      <hr>
     {%endfor%}
   </div>
   

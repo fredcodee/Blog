@@ -127,8 +127,8 @@ def new():
 def blog(idd):
   get_blog = Blogpost.query.get(int(idd))
   likes = Likes.query.filter(Likes.blogpost_likes.has(id=int(idd))).all()
-  comments = Comment.query.filter(Comment.blogpost_comments.has(id=int(idd)))
-  return render_template("article.html", blog = get_blog , comments = comments, likes = len(likes))
+  comments = Comment.query.filter(Comment.blogpost_comments.has(id=int(idd))).all()
+  return render_template("article.html", blog=get_blog, discussion=comments, likes=len(likes))
 
 #likes
 @main.route("/likes/<idd>")
@@ -149,6 +149,18 @@ def likes(idd):
   return redirect(url_for("main.blog", idd=idd))
 
 #comments
+@main.route("/comments/<idd>", methods=["POST"])
+@login_required
+def comments(idd):
+  get_blog = Blogpost.query.get(int(idd))
+  details = request.form.get("comment")
+  new_comment = Comment(details=details,user_comment=current_user, blogpost_comments = get_blog )
+  db.session.add(new_comment)
+  db.session.commit()
+
+  return redirect(url_for("main.blog", idd = idd))
+
+
 #bookmark
 #social media share
 
