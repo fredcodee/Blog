@@ -134,10 +134,12 @@ def blog(idd):
 @main.route("/likes/<idd>")
 @login_required
 def likes(idd):
-  #check if user has like before
+  #check if user has like before and unlike
   check_user = Likes.query.filter(Likes.blogpost_likes.has(id=int(idd)))
   for user in check_user:
     if user.user_likes.name == current_user.name:
+      db.session.delete(user)
+      db.session.commit()
       return redirect(url_for("main.blog", idd = idd))
    
   get_blog = Blogpost.query.get(int(idd))
@@ -160,7 +162,7 @@ def comments(idd):
 
   return redirect(url_for("main.blog", idd = idd))
 
-
+#delete comment
 #bookmark
 #social media share
 
