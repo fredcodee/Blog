@@ -160,9 +160,20 @@ def comments(idd):
   db.session.add(new_comment)
   db.session.commit()
 
+  flash("comment Added")
   return redirect(url_for("main.blog", idd = idd))
 
 #delete comment
+@main.route("/delete/comment/<idd>")
+@login_required
+def delete_comment(idd):
+  get_comment = Comment.query.get(int(idd))
+  db.session.delete(get_comment)
+  db.session.commit()
+
+  flash("comment deleted")
+  return redirect(url_for("main.blog", idd=idd))
+
 #bookmark
 #social media share
 
