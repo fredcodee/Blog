@@ -13,6 +13,8 @@ class User(UserMixin, db.Model):
       'Comment', backref='user_comment', lazy='dynamic')
   blogpost_likes = db.relationship(
       'Likes', backref='user_likes', lazy='dynamic')
+  blogpost_bookmark = db.relationship(
+      'Bookmark', backref='user_bookmark', lazy='dynamic')
 
 
 class Blogpost(db.Model):
@@ -29,6 +31,7 @@ class Blogpost(db.Model):
       'Comment', backref='blogpost_comments', cascade="all,delete", lazy='dynamic')
   likes = db.relationship(
       'Likes', backref='blogpost_likes', cascade="all,delete", lazy='dynamic')
+  bookmarks = db.relationship('Bookmark', backref = 'blogpost_bookmarks',cascade="all,delete", lazy = 'dynamic')
 
 
 class Likes(db.Model):
@@ -43,3 +46,8 @@ class Comment(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
   blogpost_id = db.Column(db.Integer, db.ForeignKey('blogpost.id'))
   date = db.Column(db.DateTime, default=datetime.now)
+
+class Bookmark(db.Model):
+  id=db.Column(db.Integer,primary_key =True)
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+  blogpost_id=db.Column(db.Integer,db.ForeignKey('blogpost.id'))

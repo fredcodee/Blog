@@ -1,6 +1,6 @@
 import stripe
 from flask import Blueprint, redirect, render_template, request, flash, url_for, abort, jsonify
-from app.models import User, Blogpost, Likes,Comment
+from app.models import User, Blogpost, Likes,Comment, Bookmark
 #from app.forms import 
 from app import db
 from flask_login import login_required, current_user
@@ -128,7 +128,16 @@ def blog(idd):
   get_blog = Blogpost.query.get(int(idd))
   likes = Likes.query.filter(Likes.blogpost_likes.has(id=int(idd))).all()
   comments = Comment.query.filter(Comment.blogpost_comments.has(id=int(idd))).all()
-  return render_template("article.html", blog=get_blog, discussion=comments, likes=len(likes))
+  bookmarks = Bookmark.query.filter(Bookmark.blogpost_bookmarks.has(id=int(idd))).all()
+
+  context = {
+    "blog" : get_blog, 
+    "discussion" : comments, 
+    "likes" : len(likes), 
+    "bookmarks" : len(bookmarks)
+  }
+
+  return render_template("article.html", **context)
 
 #likes
 @main.route("/likes/<idd>")
@@ -174,7 +183,26 @@ def delete_comment(idd):
   flash("comment deleted")
   return redirect(url_for("main.blog", idd=idd))
 
-#bookmark
+#bookmark article
+@main.route("/bookmark/<idd>")
+@login_required
+def bookmark(idd):
+  #check if user has bookmarked before and unbookmark
+  check_user = Bookmark.query.filter(Bookmark.blogpost_bookmarks.has(id=int(idd)))
+  for user in check_user:
+    if user.user_bookmark.name == current_user.name:
+      db.session.delete(user)
+      db.session.commit()
+      flash("Removed from bookmarks")
+      return redirect(url_for("main.blog", idd=idd))
+
+  get_blog = Blogpost.query.get(int(idd))
+  new_bookmark = Bookmark(user_bookmark=current_user, blogpost_bookmarks=get_blog)
+
+  db.session.add(new_bookmark)
+  db.session.commit()
+  flash("Bookmarked!")
+  return redirect(url_for("main.blog", idd=idd))
 #social media share
 
 

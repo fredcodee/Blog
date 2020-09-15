@@ -33,9 +33,11 @@
   </div>
   <div>
     <p>likes : {{likes}}</p>
+    <p>Bookmarks : {{bookmarks}}</p>
   </div>
   <div class="comments">
     <a href="/likes/{{blog.id}}"><button>Like</button></a>
+    <a href="/bookmark/{{blog.id}}"><button>Bookmark</button></a>
     <div>
       <form action="/comments/{{blog.id}}" method="POST">
         <input type="text" placeholder="Add to the discussion" name="comment">
