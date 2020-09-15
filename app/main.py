@@ -203,11 +203,20 @@ def bookmark(idd):
   db.session.commit()
   flash("Bookmarked!")
   return redirect(url_for("main.blog", idd=idd))
+
+#bookmarked articles page
+@main.route("/bookmarks")
+@login_required
+def bookmarks():
+  get_user_bookmarks = Bookmark.query.filter(
+      Bookmark.user_bookmark.has(id=current_user.id)).order_by(desc(Bookmark.id)).all()
+
+  return render_template("bookmarks.html", bookmarks = get_user_bookmarks)
+
+
+
 #social media share
-
-
-#bookmarked articles
-# #search articles
+#search articles
 #notificaation
 #view profile and payment detials
 #cancel/change payments

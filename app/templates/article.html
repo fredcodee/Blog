@@ -47,7 +47,7 @@
   <div>
     <h3>discussion</h3>
     {%for comments in discussion%}
-      {% if comments.user_comment.name == current_user.name %}
+      {% if comments.user_comment.name == current_user.name or comments.user_comment.role == 'Author' %}
         <p>{{comments.details}}</p>
         <small>{{comments.user_comment.name}}</small>
         <a href="/delete/comment/{{comments.id}}">DELETE</a>
