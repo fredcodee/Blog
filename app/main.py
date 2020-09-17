@@ -212,6 +212,16 @@ def bookmarks():
 
   return render_template("bookmarks.html", bookmarks = get_user_bookmarks)
 
+
+#users subcription id
+def get_subscription_id(email):
+  #get custormer subcription id stripe
+  get_customer = stripe.Customer.list(email="test@payment.com")
+  get_customer_id = get_customer["data"][0]["id"]
+  customer_sub = stripe.Subscription.list(customer=get_customer_id)
+  subcription_id = customer_sub["data"][0]["id"]
+  return subcription_id
+
 #view profile and payment detials
 #user profile
 @main.route("/<user>")
@@ -233,7 +243,24 @@ def profile(user):
     return render_template("profile.html",**context)
   abort(404)
 
-#cancel/change payments
+#change payments
+#cancel subscription 
+@main.route("/cancel/subscription")
+@login_required
+def cancel_sub():
+  sub_id = get_subscription_id(current_user.email)
+  if sub_id:
+    stripe.Subscription.delete(sub_id)
+    get_user = User.query.get(int(current_user.id))
+    db.session.delete(get_user)
+    db.session.commit()
+
+    return redirect(url_for("forms.logout"))
+  abort(404)
+
+
+
+
 #about me
 #admin page(delete post, user or add user and view users)
 #connect stripehook

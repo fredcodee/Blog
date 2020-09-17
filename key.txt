@@ -11,3 +11,7 @@ whsec_AlCZzWqV9PIPWpwnpFYT7snN5EmrSHfJ
 
 authur
 wilfred@fredocde.com
+
+demo
+demoadmin@demo.com
+demoadmin
