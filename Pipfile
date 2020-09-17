@@ -36,6 +36,7 @@ Werkzeug = "==0.16.0"
 Whoosh = "==2.7.4"
 WTForms = "==2.3.1"
 stripe = "*"
+flask-share = "*"
 
 [requires]
 python_version = "3.7"

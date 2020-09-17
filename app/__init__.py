@@ -2,10 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_share import Share
 
+
+#database
 db = SQLAlchemy()
 migrate = Migrate()
-
+share = Share()
 
 def create_app():
   app = Flask(__name__)
@@ -20,6 +23,8 @@ def create_app():
   login_manager = LoginManager()
   login_manager.login_view = 'forms.login'
   login_manager.init_app(app)
+
+  share.init_app(app)
 
   from app.models import User
 

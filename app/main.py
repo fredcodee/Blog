@@ -1,7 +1,6 @@
 import stripe
 from flask import Blueprint, redirect, render_template, request, flash, url_for, abort, jsonify
 from app.models import User, Blogpost, Likes,Comment, Bookmark
-#from app.forms import 
 from app import db
 from flask_login import login_required, current_user
 from sqlalchemy import or_, and_, desc
@@ -214,10 +213,7 @@ def bookmarks():
   return render_template("bookmarks.html", bookmarks = get_user_bookmarks)
 
 
-
 #social media share
-#search articles
-#notificaation
 #view profile and payment detials
 #cancel/change payments
 #about me
