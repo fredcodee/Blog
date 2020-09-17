@@ -216,7 +216,7 @@ def bookmarks():
 #users subcription id
 def get_subscription_id(email):
   #get custormer subcription id stripe
-  get_customer = stripe.Customer.list(email="test@payment.com")
+  get_customer = stripe.Customer.list(email=email)
   get_customer_id = get_customer["data"][0]["id"]
   customer_sub = stripe.Subscription.list(customer=get_customer_id)
   subcription_id = customer_sub["data"][0]["id"]
@@ -234,10 +234,22 @@ def profile(user):
     #get all comments by user
     get_comments = Comment.query.filter(Comment.user_comment.has(id = current_user.id)).all()
 
+    #get user subcription plan from stripe
+    sub_id = get_subscription_id(current_user.email)
+    if sub_id:
+      subscription = stripe.Subscription.retrieve(sub_id)
+      plan = subscription['items']['data'][0]["plan"].interval
+      if plan == "year":
+        user_plan = "Yearly Subscription"
+      elif plan == "month":
+        user_plan = "Monthly Subscription"
+
+
     context={
       'get_user': get_user,
       'get_likes': get_likes,
-      'get_comments':get_comments
+      'get_comments':get_comments,
+      'get_plan': user_plan
     }
 
     return render_template("profile.html",**context)

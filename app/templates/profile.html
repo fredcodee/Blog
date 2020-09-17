@@ -14,6 +14,18 @@
 
     <div class="payment">
       <h4>Payment plan</h4>
+      <div>
+        <p>you are currently on {{get_plan}}</p>
+        {% if get_plan == "Monthly Subscription"%}
+          <a href="#"><button>Upgrade Subscription</button></a>
+        {% else %}
+          <a href="#"><button>Downgrade Subscription</button></a>
+        {% endif %}
+      </div>
+      <hr>
+      <div>
+        <a href="/cancel/subscription"><button>Cancel subscription</button></a>
+      </div>
 
     </div>
     <div class="activity">
