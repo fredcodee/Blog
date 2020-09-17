@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <h1>{{get_user.name}}</h1>
+      <p>{{get_user.email}}</p>
+    </div>
+
+    <div class="payment">
+      <h4>Payment plan</h4>
+
+    </div>
+    <div class="activity">
+      <h4>your activities</h4>
+      <div>
+        {% for like in get_likes%}
+          <a href="/blog/{{like.blogpost_likes.id}}"><p>you liked {{like.blogpost_likes.title}}</p></a>
+        {%endfor%}
+      </div>
+      <div> 
+        {% for comment in get_comments%}
+        <a href="/blog/{{comment.blogpost_comments.id}}"><p>you commented on  {{comment.blogpost_comments.title}}</p></a>
+        {%endfor%}
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>

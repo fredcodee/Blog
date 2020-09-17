@@ -212,9 +212,27 @@ def bookmarks():
 
   return render_template("bookmarks.html", bookmarks = get_user_bookmarks)
 
-
-#social media share
 #view profile and payment detials
+#user profile
+@main.route("/<user>")
+@login_required
+def profile(user):
+  if current_user.name == user:
+    get_user = User.query.filter_by(name=user).first()
+    #get all likes by user
+    get_likes = Likes.query.filter(Likes.user_likes.has(id = current_user.id)).all()
+    #get all comments by user
+    get_comments = Comment.query.filter(Comment.user_comment.has(id = current_user.id)).all()
+
+    context={
+      'get_user': get_user,
+      'get_likes': get_likes,
+      'get_comments':get_comments
+    }
+
+    return render_template("profile.html",**context)
+  abort(404)
+
 #cancel/change payments
 #about me
 #admin page(delete post, user or add user and view users)
