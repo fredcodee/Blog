@@ -281,9 +281,7 @@ def update_sub(idd):
 
     flash("subscription updated")
     return redirect(url_for("main.profile", user = current_user.name))
-
-
-
+  abort(404)
 
 #cancel subscription 
 @main.route("/cancel/subscription")
