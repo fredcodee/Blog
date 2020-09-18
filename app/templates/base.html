@@ -8,15 +8,16 @@
 <body>
   {% block content %}
   <a href="/">Home</a>|
-  <a href="/">About Me</a> |
+  <a href="https://fredcodee.github.io/portfolio/">About Me</a> |
   {% if not current_user.is_authenticated %}
     <a class="nav-link" href="/login">Login</a>
     <a href="/payment">subscribe</a>
   {%else%}
-    {% if current_user.role == 'Author' or current_user.role == "Editor" %}
+    {% if current_user.role == 'Author'%}
       <a href="/new">Add article</a> |
-    {% elif current_user.role == "Author" %}
-      <a href="#">Admin panel</a> |
+      <a href="/adminaccess">Admin panel</a> |
+    {% elif current_user.role == 'Editor'%}
+      <a href="/new">Add article</a> |
     {% endif %}
     <a href="/bookmarks">Bookmarks</a> |
     <a href="/{{current_user.name}}">{{current_user.name}}</a> |

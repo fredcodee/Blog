@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <h4>users</h4>
+      {% for user in users%}
+        <p>{{user.name}} - {{user.email}}</p>
+      {% endfor %}
+    </div>
+
+    <div>
+      <h4>manage posts</h4>
+      {%for post in posts%}
+        <a href="/blog/{{post.id}}"><p>{{post.title}}</p></a>
+      {%endfor%}
+    </div>
+  </div>
+</body>
+</html>

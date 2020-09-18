@@ -297,10 +297,20 @@ def cancel_sub():
     return redirect(url_for("forms.logout"))
   abort(404)
 
-
-
-
-#about me
 #admin page(delete post, user or add user and view users)
+@main.route("/adminaccess")
+@login_required
+def adminaccess():
+  if current_user.role == "Author":
+    getall_users = User.query.all()
+    getall_post = Blogpost.query.all()
+
+    context={
+      'users':getall_users,
+      'posts':getall_post
+    }
+
+    return render_template("admin.html", **context)
+  abort(404)
 #connect stripehook
 
