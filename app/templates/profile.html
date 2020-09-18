@@ -7,6 +7,13 @@
 </head>
 <body>
   <div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages%}
+    <div class="alert alert-danger" role="alert">
+      {{ messages[0] }}
+    </div>
+    {%endif%}
+    {% endwith %}
     <div>
       <h1>{{get_user.name}}</h1>
       <p>{{get_user.email}}</p>
@@ -17,9 +24,9 @@
       <div>
         <p>you are currently on {{get_plan}}</p>
         {% if get_plan == "Monthly Subscription"%}
-          <a href="#"><button>Upgrade Subscription</button></a>
+          <a href="/update/subscription/monthly"><button>Upgrade Subscription</button></a>
         {% else %}
-          <a href="#"><button>Downgrade Subscription</button></a>
+          <a href="/update/subscription/yearly"><button>Downgrade Subscription</button></a>
         {% endif %}
       </div>
       <hr>

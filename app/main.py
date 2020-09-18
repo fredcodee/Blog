@@ -256,6 +256,35 @@ def profile(user):
   abort(404)
 
 #change payments
+@main.route("/update/subscription/<idd>")
+@login_required
+def update_sub(idd):
+  #get user subcription plan from stripe
+  sub_id = get_subscription_id(current_user.email)
+  subscription = stripe.Subscription.retrieve(sub_id)
+
+  if sub_id:
+    if idd == "monthly":
+      #update to year
+      price_id = 'price_1HNjoDKZXGIOAX0RoZ2yYg7d'
+    elif idd == "yearly":
+      #change to monthly
+      price_id = 'price_1HO7guKZXGIOAX0RmSP5D0KE'
+    
+    stripe.Subscription.modify(
+    subscription.id,
+    proration_behavior='create_prorations',
+    items=[{
+        'id': subscription['items']['data'][0].id,
+        'price': price_id,
+    }])
+
+    flash("subscription updated")
+    return redirect(url_for("main.profile", user = current_user.name))
+
+
+
+
 #cancel subscription 
 @main.route("/cancel/subscription")
 @login_required
