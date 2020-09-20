@@ -11,6 +11,18 @@
       <h4>users</h4>
       {% for user in users%}
         <p>{{user.name}} - {{user.email}}</p>
+        <a href="/adminaccess/delete/{{user.id}}"><button>Delete</button></a>
+        <div>
+          <form action="/adminaccess/edit/user/{{user.id}}" class="form-container" method="POST">
+            <select name="selection">
+              <option value="SL">Select Role</option>
+              <option value="Author">Admin</option>
+              <option value="Editor">Editor</option>
+              <option value="Subscriber">Subscriber</option>
+            </select>
+            <button class="btn btn-dark">Change</button>
+          </form>
+        </div>
       {% endfor %}
     </div>
 

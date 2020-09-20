@@ -297,6 +297,7 @@ def cancel_sub():
     return redirect(url_for("forms.logout"))
   abort(404)
 
+#ADMIN
 #admin page(delete post, user or add user and view users)
 @main.route("/adminaccess")
 @login_required
@@ -312,5 +313,45 @@ def adminaccess():
 
     return render_template("admin.html", **context)
   abort(404)
+
+#delete
+#delete user(Admin)
+@main.route("/adminaccess/delete/<idd>")
+@login_required
+def delete_user(idd):
+  if current_user.role == "Author":
+    get_user = User.query.get(int(idd))
+    if get_user:
+      #cancel subscription
+      sub_id = get_subscription_id(get_user.email)
+      if sub_id:
+        stripe.Subscription.delete(sub_id)
+        db.session.delete(get_user)
+        db.session.commit()
+        flash("user deleted")
+        return redirect(url_for("main.adminaccess"))
+  else:
+    abort(404)
+
+
+#edituser
+@main.route("/adminaccess/edit/user/<idd>")
+@login_required
+def edit_user(idd):
+  if current_user.role == "Author":
+    get_user = User.query.get(int(idd))
+    role = request.form.get("selection")
+
+    if get_user and role != "SL":
+      get_user.role = role
+      db.session.commit()
+      flash("New role assigned")
+      return redirect(url_for("main.adminaccess"))
+    else:
+      flash("invalid / no role was assigned")
+      return redirect(url_for("main.mra"))
+  else:
+    abort(404)
+#delete post
 #connect stripehook
 
