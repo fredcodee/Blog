@@ -349,9 +349,25 @@ def edit_user(idd):
       return redirect(url_for("main.adminaccess"))
     else:
       flash("invalid / no role was assigned")
-      return redirect(url_for("main.mra"))
+      return redirect(url_for("main.adminaccess"))
   else:
     abort(404)
+
+
 #delete post
+@main.route("/adminaccess/delete/post/<idd>")
+@login_required
+def delete_post(idd):
+  get_post = Blogpost.query.get(int(idd))
+  if get_post:
+    db.session.delete(get_post)
+    db.session.commit()
+
+    flash("article deleted")
+    return redirect(url_for("main.adminaccess"))
+  else:
+    abort(404)
+
+  
 #connect stripehook
 
