@@ -17,7 +17,7 @@ main = Blueprint('main', __name__)
 def home():
   #get articles
   articles = Blogpost.query.all()
-  return render_template("base.html", articles = articles)
+  return render_template("index.html", articles = articles)
 
 
 @main.route("/payment")
