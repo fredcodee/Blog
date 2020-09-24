@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-</head>
-<body>
-  <div>
+{% extends "index.html" %}
+
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block contents %}
+  <div class="loginform">
+    <h2>Login</h2>
     {% with messages = get_flashed_messages() %}
     {% if messages%}
     <div class="alert alert-danger" role="alert">
@@ -45,7 +46,7 @@
       </div>
     
       <div class="login-signup" style="text-align: center; padding-top: 2rem;">
-        <span>Don't have an account? <a href="{{ url_for('forms.signup') }}">Subscribe.</a></span>
+        <span>Don't have an account? <a href="/payment">Subscribe.</a></span>
       </div>
       <div style="text-align: center;">
         <span><a href="/demologin">Try demo</a></span>
@@ -53,5 +54,4 @@
     
     </form>
   </div>
-</body>
-</html>
+{%endblock%}

@@ -1,10 +1,14 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title>Fredcode</title>
+		{%block title %}
+			<title>Fredcode</title>
+		{%endblock%}
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/main.css')}}" />
+		{%block links%}
+		{%endblock%}
 	</head>
 	<body>
 
@@ -35,6 +39,7 @@
 					{%endif%}
 				</ul>
 			</nav>
+			{%block contents %}
 				<section id="banner" data-video="images/banner1">
 					<div class="inner">
 						{% with messages = get_flashed_messages() %}
@@ -53,7 +58,7 @@
 
 				</section>
 
-		<!-- Main -->
+				<!-- Main -->
 			<div id="main">
 
 			<!-- One -->
@@ -87,6 +92,7 @@
 				</section>
 
 			</div>
+			{%endblock%}
 
 		<!-- Footer -->
 			<footer id="footer">

@@ -3827,3 +3827,28 @@
 			}
 
 		}
+
+.loginform{
+	margin-top: 10rem;
+  width: 70%;
+  margin-left: 15%;
+}
+.loginform h2{
+	text-align: center;
+}
+
+.loginform .email{
+	padding-bottom: 2rem;
+}
+.signupform{
+	margin-top: 5rem;
+	width: 70%;
+	margin-left: 15%;
+}
+.signupform .major{
+	text-align: center;
+}
+
+.alert-danger{
+	color: red;
+}

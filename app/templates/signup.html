@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup</title>
-</head>
-<body>
-  <div class="container">
+{% extends "index.html" %}
+
+
+{% block title %}
+<title>Sign up</title>
+{% endblock %}
+
+{% block contents %}
+  <div class="signupform">
     {% with messages = get_flashed_messages() %}
     {% if messages%}
     <div class="alert alert-danger" role="alert">
@@ -15,10 +15,10 @@
     {%endif%}
     {% endwith %}
     
-    <header class="major">
+    <div class="major">
       <h2>Sign up</h2>
       <p>Get Started in less than 30 seconds</p>
-    </header>
+    </div>
     <hr>
 
     <div class="form">
@@ -76,5 +76,4 @@
     </div
   
   </div>
-</body>
-</html>
+{%endblock%}
