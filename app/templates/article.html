@@ -1,65 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{blog.title}}</title>
-  {{ share.load() }}
-</head>
-<body>
-  <a href="/">home</a>
-  <div>
-    {% with messages = get_flashed_messages() %}
-    {% if messages%}
-    <div class="alert alert-danger" role="alert">
-      {{ messages[0] }}
-    </div>
-    {%endif%}
-    {% endwith %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Article</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/main.css')}}" />
+	</head>
+	<body class="subpage">
 
-    <div>
-      <h1>{{blog.title}}</h1>
-    </div>
-    <div>
-      <small>{{blog.date}}</small>
-      <small>{{blog.author}}</small>
-    </div>
-    <hr>
-    <div>
-      <img src="{{blog.imagelink}}" alt="cover image">
-    </div>
-    <div>
-      {{blog.content}}
-    </div>
-  </div>
-  <div>
-    {{ share.create(title='Share with: ') }}
-    <p>likes : {{likes}}</p>
-    <p>Bookmarks : {{bookmarks}}</p>
-  </div>
-  <div class="comments">
-    <a href="/likes/{{blog.id}}"><button>Like</button></a>
-    <a href="/bookmark/{{blog.id}}"><button>Bookmark</button></a>
-    <div>
-      <form action="/comments/{{blog.id}}" method="POST">
-        <input type="text" placeholder="Add to the discussion" name="comment">
-      </form>
-    </div>
-  </div>
-  <div>
-    <h3>discussion</h3>
-    {%for comments in discussion%}
-      {% if comments.user_comment.name == current_user.name or comments.user_comment.role == 'Author' %}
-        <p>{{comments.details}}</p>
-        <small>{{comments.user_comment.name}}</small>
-        <a href="/delete/comment/{{comments.id}}">DELETE</a>
-        <hr>
-      {%else%}
-        <p>{{comments.details}}</p>
-        <small>{{comments.user_comment.name}}</small>
-      {% endif %}
-    {%endfor%}
-  </div>
-  
-</body>
+		<!-- Header -->
+			<header id="header">
+				<h1><a href="https://www.linkedin.com/in/wilfred-chukwu-891830174/">Blogger <span>by Fredcode</span></a></h1>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="/">Home</a></li>
+					<li><a href="https://fredcodee.github.io/portfolio/">About Me</a></li>
+					{% if not current_user.is_authenticated %}
+					<li><a class="nav-link" href="/login">Login</a></li>
+					<li><a href="/payment">subscribe</a></li>
+					{%else%}
+					<li><a href="/bookmarks">Bookmarks</a></li>
+					{% if current_user.role == 'Author'%}
+					<li><a href="/new">Add article</a></li>
+					<li><a href="/adminaccess">Admin panel</a></li>
+					{% elif current_user.role == 'Editor'%}
+					<li><a href="/new">Add article</a></li>
+					{% endif %}
+					<li><a href="/{{current_user.name}}">{{current_user.name}}</a></li>
+					<li><a href="/logout">Logout</a></li>
+					{%endif%}
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<div id="main">
+
+			<!-- One -->
+				<section class="wrapper style1">
+					<div class="inner">
+						{% with messages = get_flashed_messages() %}
+						{% if messages%}
+						<div class="alert alert-success" role="alert">
+							{{ messages[0] }}
+						</div>
+						{%endif%}
+						{% endwith %}
+						<header class="align-center">
+							<h2>{{blog.title}}</h2>
+							<p>by {{blog.author}} | {{blog.date.strftime("%d %m %Y")}}</p>
+						</header>
+						<div class="image">
+							<div class="image-wrapper">
+								<img src="{{blog.imagelink}}" alt="cover image">
+							</div>
+						</div>
+						<p>{{blog.content}}</p>
+					</div>
+				</section>
+
+			<!-- Three -->
+				<section class="wrapper ">
+					<div class="inner">
+						<header class="align-center">
+							<h2>Discussion</h2>
+							<div class="commentform">
+								<form action="/comments/{{blog.id}}" method="POST">
+									<input type="text" placeholder="Add to the discussion" name="comment">
+									<button type="submit">SUBMIT</button>
+								</form>
+								<hr>
+							</div>
+						</header>
+						
+
+						<div class="comments">
+							{%for comments in discussion%}
+								{% if comments.user_comment.name == current_user.name or comments.user_comment.role == 'Author' %}
+									<small>{{comments.user_comment.name}} | {{comments.date.strftime("%d %m %Y")}}</small>
+									<a href="/delete/comment/{{comments.id}}">DELETE</a>
+
+									<p>{{comments.details}}</p>
+									<hr>
+								{%else%}
+									<small>{{comments.user_comment.name}} | {{comments.date.strftime("%d %m %Y")}}</small>
+									<p>{{comments.details}}</p>
+								{% endif %}
+							{%endfor%}
+						</div>
+					</div>
+				</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="flex flex-3">
+						<div class="col">
+							<ul>
+								<li><a href="mailto:wilfredchukwu1@gmail.com"></a>Contact me</li>
+							</ul>
+						</div>
+						<div class="col">
+							<ul>
+								<li>
+									<a href="/">home</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<ul>
+								{% if not current_user.is_authenticated %}
+								<li><a href="/login">Login</a></li>
+								<li><a href="/payment">subscribe</a></li>
+								{%else%}
+								<li><a href="/logout">Logout</a></li>
+								{%endif%}
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="copyright">
+					<ul class="icons">
+						<li><a href="https://github.com/fredcodee" class="icon fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="https://www.linkedin.com/in/wilfred-chukwu-891830174/" class="icon fa-linkedin"><span
+									class="label">Linkedin</span></a></li>
+						<li><a href="https://twitter.com/fredcode_" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="mailto:wilfredchukwu1@gmail.com" class="icon fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					&copy; fredcodee. Design: <a href="">Wilfred</a>. Images: <a href="https://unsplash.com">Splash</a>.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/static/assets/js/skel.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
+
+	</body>
 </html>

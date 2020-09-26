@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{blog.title}}</title>
+  {{ share.load() }}
+</head>
+<body>
+  <a href="/">home</a>
+  <div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages%}
+    <div class="alert alert-danger" role="alert">
+      {{ messages[0] }}
+    </div>
+    {%endif%}
+    {% endwith %}
+
+    <div>
+      <h1>{{blog.title}}</h1>
+    </div>
+    <div>
+      <small>{{blog.date}}</small>
+      <small>{{blog.author}}</small>
+    </div>
+    <hr>
+    <div>
+      <img src="{{blog.imagelink}}" alt="cover image">
+    </div>
+    <div>
+      {{blog.content}}
+    </div>
+  </div>
+
+
+  <div>
+    {{ share.create(title='Share with: ') }}
+    <p>likes : {{likes}}</p>
+    <p>Bookmarks : {{bookmarks}}</p>
+  </div>
+  <div class="comments">
+    <a href="/likes/{{blog.id}}"><button>Like</button></a>
+    <a href="/bookmark/{{blog.id}}"><button>Bookmark</button></a>
+
+
+    
+    <div>
+      <form action="/comments/{{blog.id}}" method="POST">
+        <input type="text" placeholder="Add to the discussion" name="comment">
+      </form>
+    </div>
+  </div>
+  <div>
+    <h3>discussion</h3>
+    {%for comments in discussion%}
+      {% if comments.user_comment.name == current_user.name or comments.user_comment.role == 'Author' %}
+        <p>{{comments.details}}</p>
+        <small>{{comments.user_comment.name}}</small>
+        <a href="/delete/comment/{{comments.id}}">DELETE</a>
+        <hr>
+      {%else%}
+        <p>{{comments.details}}</p>
+        <small>{{comments.user_comment.name}}</small>
+      {% endif %}
+    {%endfor%}
+  </div>
+  
+</body>
+</html>
