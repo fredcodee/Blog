@@ -2807,6 +2807,12 @@
 			width: 80em;
 			position: relative;
 			z-index: 99;
+			text-align: center;
+		}
+
+		.wrapper .content{
+			width: 70%;
+			margin: auto;
 		}
 
 		.wrapper header {

@@ -55,15 +55,18 @@
 							<p>by {{blog.author}} | {{blog.date.strftime("%d %m %Y")}}</p>
 						</header>
 						<div class="image">
-							<div class="image-wrapper">
+							<span class="image fit">
 								<img src="{{blog.imagelink}}" alt="cover image">
-							</div>
+							</span>
 						</div>
-						<p>{{blog.content}}</p>
+						<div class="content">
+							<p>{{blog.content}}</p>
+						</div>
+						<div class="socialmedia">
+							{{ share.create(title='Share with: ') }}
+						</div>
 					</div>
-					<div class="socialmedia">
-						{{ share.create(title='Share with: ') }}
-					</div>
+					
 				</section>
 
 			<!-- Three -->
