@@ -90,12 +90,12 @@
 									<small>{{comments.user_comment.name}} | {{comments.date.strftime("%d %m %Y")}}</small>
 									<a href="/delete/comment/{{comments.id}}">DELETE</a>
 
-									<p>{{comments.details}}</p>
-									<hr>
+									<p class="comment">{{comments.details}}</p>
 								{%else%}
 									<small>{{comments.user_comment.name}} | {{comments.date.strftime("%d %m %Y")}}</small>
-									<p>{{comments.details}}</p>
+									<p class="comment">{{comments.details}}</p>
 								{% endif %}
+								<hr>
 							{%endfor%}
 						</div>
 					</div>
@@ -105,9 +105,9 @@
 
 			<!--sidenav bar-->
 			<div class="sidenav">
-				<p><a href="/likes/{{blog.id}}">likes : {{likes}}</a></p>
-				<p><a href="/bookmark/{{blog.id}}">Bookmarks : {{bookmarks}}</a></p>
-				<p>comments : {{discussion | length }}</po>
+				<p><a href="/likes/{{blog.id}}">♥️ {{likes}}</a></p>
+				<p><a href="/bookmark/{{blog.id}}">📒 {{bookmarks}}</a></p>
+				<p>🗨️ {{discussion | length }}</po>
 			</div>
 
 		<!-- Footer -->

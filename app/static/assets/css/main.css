@@ -3863,11 +3863,11 @@
 }
 /* sidebar nav */
 .con, #footer{
-	margin-left: 160px;
+	margin-left: 5rem;
 }
 .sidenav {
   height: 100%;
-  width: 160px;
+  width: 5rem;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -3897,4 +3897,13 @@
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+.commentform button{
+	margin-top: 1rem;
+}
+.comments a {
+	color: red;
+}
+.comment{
+	color: white;
 }
