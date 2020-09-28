@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Article</title>
+		<title>{{blog.title}}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/main.css')}}" />
+		{{ share.load() }}
 	</head>
 	<body class="subpage">
 
@@ -37,7 +38,7 @@
 			</nav>
 
 		<!-- Main -->
-			<div id="main">
+			<div id="main" class="con">
 
 			<!-- One -->
 				<section class="wrapper style1">
@@ -59,6 +60,9 @@
 							</div>
 						</div>
 						<p>{{blog.content}}</p>
+					</div>
+					<div class="socialmedia">
+						{{ share.create(title='Share with: ') }}
 					</div>
 				</section>
 
@@ -94,6 +98,13 @@
 					</div>
 				</section>
 
+			</div>
+
+			<!--sidenav bar-->
+			<div class="sidenav">
+				<p><a href="/likes/{{blog.id}}">likes : {{likes}}</a></p>
+				<p><a href="/bookmark/{{blog.id}}">Bookmarks : {{bookmarks}}</a></p>
+				<p>comments : {{discussion | length }}</po>
 			</div>
 
 		<!-- Footer -->
