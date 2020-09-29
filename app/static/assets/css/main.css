@@ -3862,7 +3862,7 @@
 	color: green;
 }
 /* sidebar nav */
-.con, #footer{
+.con, .s-footer{
 	margin-left: 5rem;
 }
 .sidenav {
@@ -3889,7 +3889,6 @@
 }
 
 .main {
-  margin-left: 160px;
   font-size: 28px;
   padding: 0px 10px;
 }
@@ -3906,4 +3905,10 @@
 }
 .comment{
 	color: white;
+}
+
+.sub-contents{
+	margin-top: 5rem;
+	text-align : center;
+	margin-bottom: 5rem;
 }

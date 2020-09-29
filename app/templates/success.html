@@ -1,14 +1,18 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 
-{% block content %}
-<section class="section">
+
+{% block title %}
+<title>success</title>
+{% endblock %}
+
+{% block contents %}
+<section class="sub-contents">
   <div class="container">
-    <p>Your payment succeeded.</p>
-  </div>
-  <div>
-    <h2>thanks you for your payment, now sign up to get started</h2>
-    <a href="/signup"><button type="submit">Sign up</button></a>
- 
+    <h3>Your payment succeeded.</h3>
+    <div>
+      <p>Thanks you for your payment, now sign up to get started</p>
+      <a href="/signup" class ="button special fit">Sign up</a>
+    </div>
   </div>
 </section>
 

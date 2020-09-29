@@ -1,9 +1,15 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 
-{% block content %}
-<section class="section">
+
+{% block title %}
+<title>Cancelled</title>
+{% endblock %}
+
+{% block contents %}
+<section class="sub-contents">
   <div class="container">
-    <p>Your payment was cancelled.</p>
+    <h3>Your payment was cancelled.</h3>
+    <a href="/payment">Try Again</a> | <a href="/">go back to home</a>
   </div>
 </section>
 
