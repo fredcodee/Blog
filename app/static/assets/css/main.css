@@ -3912,3 +3912,29 @@
 	text-align : center;
 	margin-bottom: 5rem;
 }
+/* payment page */
+.sub-title{
+	margin-top: 5rem;
+	text-align: center;
+}
+.sub-title h2{
+	margin-bottom: 0.2rem;
+}
+.sub-title p{
+	font-size: 1.3em;
+}
+
+.details{
+	text-align: center;
+	margin-bottom: 4rem;
+}
+
+.plans span{
+	color: white;
+	font-size: 4.5rem;
+  font-weight: 500
+}
+
+.plans li{
+	list-style: none;
+}

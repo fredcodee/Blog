@@ -1,23 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment checkout</title>
-  <script src="https://js.stripe.com/v3/"></script>
-  
-</head>
-<body>
-  <div>
-    <h1  id="demo">Payment</h1>
-    <p>$50 / yearly</p>
-    <a href="#" class="submitBtn" data-subcriber="yearly">Subscribe</a>
-    <h1>payment</h1>
-    <p>$5 / Monthly</p>
-    <a href="#" class="submitBtn" data-subcriber="monthly">Subscribe</a>
+{% extends "index.html" %}
+
+
+{% block title %}
+<title>Subscribe</title>
+{% endblock %}
+
+{%block links%}
+<script src="https://js.stripe.com/v3/"></script>
+{%endblock%}
+
+{% block contents %} 
+  <div class="sub-title">
+    <h2 id="demo">Choose your membership</h2>
+    <p>Unlock full access and get members-only content</p>
+  </div>
+
+  <div class="row details">
+    <div class="6u 12u$(small) plans">
+      <p>$<span>5</span> / Monthly</p>
+      <ul>
+        <li>Get an accountability partner over email</li>
+        <li>Full access to all private posts</li>
+        <li>Read interviews before everyone else</li>
+        <li>No ads in articles</li>
+      </ul>
+      <a href="#" class="submitBtn button alt" data-subcriber="monthly">Choose this plan</a>
+    </div>
+
+    <div class="6u 12u$(small) plans">
+      <p>$<span>50</span> / yearly</p>
+      <ul>
+        <li>Everything in the monthly plan plus...</li>
+        <li>Two free months</li>
+      </ul>
+      <a href="#" class="submitBtn button alt" data-subcriber="yearly">Choose this plan</a>
+    </div>
   </div> 
 
-  <script src="{{ url_for('static', filename='stripe.js') }}"></script>
-  <script src="{{ url_for('static', filename='main.js') }}"></script>
-</body>
-</html>
+  
+  {%block scripts%}
+    <script src="{{ url_for('static', filename='stripe.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+  {%endblock%}
+{%endblock%}
