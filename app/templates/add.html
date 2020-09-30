@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Article</title>
-</head>
-<body>
-  <div><a href="/">home</a></div>
-  <div>
+{% extends "index.html" %}
+
+
+{% block title %}
+<title>Add Article</title>
+{% endblock %}
+
+{% block contents %}
+  
+  <div class="loginform">
     <form action="/new" method="POST">
       <fieldset>
         <label for="coverimage">Add a Cover Image</label>
         <input type="text" name="coverimage" id="coverimage" placeholder="paste your image link here">
       </fieldset>
       <fieldset>
-        <div><input type="text" name="title" placeholder="New Post Title Here..." required>
+        <div>
+          <input type="text" name="title" placeholder="New Post Title Here..." required>
         </div>
-        <div><input type="text" name="content" placeholder="Write your post content here..." required>
+        <div>
+          <input class= "post" type="text" name="content" placeholder="Write your post content here..." required>
         </div>
       </fieldset>
       <fieldset>
@@ -28,12 +30,11 @@
           </select>
         </div>
       </fieldset>
-      <div>
+      <div class="new-article">
         <button type="submit">Publish</button>
       </div>
     </form>
 
   </div>
   
-</body>
-</html>
+{%endblock%}

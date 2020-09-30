@@ -3846,6 +3846,11 @@
 .loginform .email{
 	padding-bottom: 2rem;
 }
+
+.loginform .post{
+	height: 20rem;
+	margin-bottom: 2rem;
+}
 .signupform{
 	margin-top: 5rem;
 	width: 70%;
@@ -3937,4 +3942,9 @@
 
 .plans li{
 	list-style: none;
+}
+
+
+.new-article{
+	margin-top: 2rem;
 }
