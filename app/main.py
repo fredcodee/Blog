@@ -296,12 +296,13 @@ def cancel_sub():
     return redirect(url_for("forms.logout"))
   abort(404)
 
+
 #ADMIN
 #admin page(delete post, user or add user and view users)
 @main.route("/adminaccess")
 @login_required
 def adminaccess():
-  if current_user.role == "Author":
+  if current_user.role != "Subscriber":
     getall_users = User.query.all()
     getall_post = Blogpost.query.all()
 
@@ -367,3 +368,19 @@ def delete_post(idd):
   else:
     abort(404)
 
+
+'''@main.route("/adddemo")
+def add_demo():
+  getuser = User.query.filter_by(email = "demoadmin.blogger.com").first()
+  getuser2 = User.query.filter_by(email="demoeditor.blogger.com").first()
+  getuser3 = User.query.filter_by(email="demosubscriber.blogger.com").first()
+
+  getuser.email = "demoadmin@blogger.com"
+  getuser2.email = "demoeditor@blogger.com"
+  getuser3.email = "demosubscriber@blogger.com"
+  getuser3.name = "Demo Subscriber"
+  db.session.commit()
+
+
+  flash("changes made")
+  return redirect(url_for("main.home"))'''

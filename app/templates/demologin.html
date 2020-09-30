@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+
+{% block title %}
+<title>Demo accounts</title>
+{% endblock %}
+
+{% block contents %}
+  <div class="loginform">
+    <form action="/demologin" method="POST">
+      <label for="account">Choose Role For Demo Account</label>
+      <select name="demo" id="account">
+        <option value="A">Admin</option>
+        <option value="E">Editor</option>
+        <option value="S">Subscriber</option>
+      </select>
+      <div style="text-align: center; padding-top: 2rem;">
+        <input type="submit">
+      </div>
+    </form>
+  </div>
+{%endblock%}

@@ -43,6 +43,29 @@ def login():
 
   return render_template("login.html", form=form)
 
+#demo login
+@forms.route("/demologin", methods=["GET","POST"])
+def demo_login():
+  if request.method == "POST":
+    try:
+      account =request.form.get("demo")
+      if account:
+        if account == "A":
+          user = User.query.filter_by(email="demoadmin@blogger.com").first()
+          login_user(user)
+        if account == "E":
+          user = User.query.filter_by(name="Demo Editor").first()
+          login_user(user)
+        if account == "S":
+          user = User.query.filter_by(name="Demo Subscriber").first()
+          login_user(user)
+      return redirect(url_for('main.home'))
+    except:
+      flash('please choose an account')
+      return(redirect(url_for('forms.login')))
+  return render_template("demologin.html")
+
+
 #signup
 @forms.route('/signup', methods=['GET', 'POST'])
 def signup():

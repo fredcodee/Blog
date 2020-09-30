@@ -17,7 +17,7 @@
     <div>
       <h4>users</h4>
       {% for user in users%}
-        <p>{{user.name}} - {{user.email}}</p>
+        <p>{{user.name}} - {{user.email}} - {{user.role}}</p>
         <a href="/adminaccess/delete/{{user.id}}"><button>Delete</button></a>
         <div>
           <form action="/adminaccess/edit/user/{{user.id}}" class="form-container" method="POST">
@@ -30,6 +30,7 @@
             <button class="btn btn-dark">Change</button>
           </form>
         </div>
+        <hr>
       {% endfor %}
     </div>
 
