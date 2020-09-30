@@ -37,7 +37,7 @@
     <div>
       <h4>manage posts</h4>
       {%for post in posts%}
-        <a href="/blog/{{post.id}}"><p>{{post.title}}</p></a> | <a href="/adminaccess/delete/post/{{post.id}}"> <button>Delete</button></a>
+        <a href="/blog/{{post.id}}"><p>{{post.title}} - {{post.access}}</p></a> | <a href="/adminaccess/delete/post/{{post.id}}"> <button>Delete</button></a>
       {%endfor%}
     </div>
   </div>

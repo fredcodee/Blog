@@ -71,23 +71,43 @@
 						</header>
 						<!-- 2 Column Video Section -->
 						{%for article in articles %}
-							<div class="flex">
-								<div class="video col">
-									<div class="image fit">
-										<img src="{{article.imagelink}}" alt="blog image" />
+							{% if article.access or current_user.is_authenticated%}
+								<div class="flex">
+									<div class="video col">
+										<div class="image fit">
+											<img src="{{article.imagelink}}" alt="blog image" />
+										</div>
+										<p class="title">
+											{{article.title}}
+										</p>
+										<p class="caption">
+											{{article.subtitle}}...
+										</p>
+										<small class="details">
+											by {{article.author}} | {{article.date.strftime("%d %m %Y")}}
+										</small>
+										<a href="/blog/{{article.id}}" class="link"><span>Click Me</span></a>
 									</div>
-									<p class="title">
-										{{article.title}}
-									</p>
-									<p class="caption">
-										{{article.subtitle}}...
-									</p>
-									<small class="details">
-										by {{article.author}} | {{article.date.strftime("%d %m %Y")}}
-									</small>
-									<a href="/blog/{{article.id}}" class="link"><span>Click Me</span></a>
 								</div>
-							</div>
+							{%else%}
+								<div class="flex">
+									<div class="video col">
+										<div class="image fit">
+											<img src="https://i.ibb.co/1XjcjS1/sub.png" alt="blog image" />
+										</div>
+										<p class="title">
+											{{article.title}}
+										</p>
+										<p class="caption">
+											{{article.subtitle}}...
+										</p>
+										<small class="details">
+											by {{article.author}} | {{article.date.strftime("%d %m %Y")}}
+										</small>
+										<a href="/blog/{{article.id}}" class="link"><span>Click Me</span></a>
+									</div>
+								</div>
+							{%endif%}
 							{%endfor%}
 					</div>
 				</section>

@@ -124,18 +124,21 @@ def new():
 @main.route("/blog/<idd>")
 def blog(idd):
   get_blog = Blogpost.query.get(int(idd))
-  likes = Likes.query.filter(Likes.blogpost_likes.has(id=int(idd))).all()
-  comments = Comment.query.filter(Comment.blogpost_comments.has(id=int(idd))).all()
-  bookmarks = Bookmark.query.filter(Bookmark.blogpost_bookmarks.has(id=int(idd))).all()
 
-  context = {
-    "blog" : get_blog, 
-    "discussion" : comments, 
-    "likes" : len(likes), 
-    "bookmarks" : len(bookmarks)
-  }
+  if get_blog.access or current_user.is_authenticated:
+    likes = Likes.query.filter(Likes.blogpost_likes.has(id=int(idd))).all()
+    comments = Comment.query.filter(Comment.blogpost_comments.has(id=int(idd))).all()
+    bookmarks = Bookmark.query.filter(Bookmark.blogpost_bookmarks.has(id=int(idd))).all()
 
-  return render_template("article.html", **context)
+    context = {
+      "blog" : get_blog, 
+      "discussion" : comments, 
+      "likes" : len(likes), 
+      "bookmarks" : len(bookmarks)
+    }
+
+    return render_template("article.html", **context)
+  return render_template("payment.html")
 
 #likes
 @main.route("/likes/<idd>")
