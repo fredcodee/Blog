@@ -3948,3 +3948,7 @@
 .new-article{
 	margin-top: 2rem;
 }
+
+.col ul li{
+	list-style: none;
+}
