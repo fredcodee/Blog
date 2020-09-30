@@ -1,24 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>your bookmarks</title>
-</head>
-<body>
-  <div class="container">
+{% extends "index.html" %}
+
+
+{% block title %}
+<title>Bookmarks</title>
+{% endblock %}
+
+{% block contents %}
+  <div class="sub-contents">
     <div>
-      <h1> your bookmarks</h1>
+      <h3> your bookmarks</h3>
     </div>
     <div>
       {% if bookmarks|length > 0%}
         {%for bookmark in bookmarks %}
           <a href="/blog/{{bookmark.blogpost_bookmarks.id}}"><p>{{bookmark.blogpost_bookmarks.title}}</p></a>
+          <hr>
         {% endfor %}
       {% else %}
         <p>no saved articles</p>
       {% endif %}
     </div>
   </div>
-</body>
-</html>
+{%endblock%}
