@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div class="container">
+{% extends "index.html" %}
+
+
+{% block title %}
+<title>{{get_user.name}}</title>
+{% endblock %}
+
+{% block contents %}
+  <div class="sub-contents">
     {% with messages = get_flashed_messages() %}
     {% if messages%}
     <div class="alert alert-danger" role="alert">
@@ -21,18 +21,22 @@
 
     <div class="payment">
       <h4>Payment plan</h4>
-      <div>
+      <div style="margin-bottom: 1rem;">
         <p>you are currently on {{get_plan}}</p>
         {% if get_plan == "Monthly Subscription"%}
-          <a href="/update/subscription/monthly"><button>Upgrade Subscription</button></a>
-        {% else %}
-          <a href="/update/subscription/yearly"><button>Downgrade Subscription</button></a>
+          <a href="/update/subscription/monthly" class="button">Upgrade Subscription</a>
+        {% elif get_plan == "Yearly Subscription" %}
+          <a href="/update/subscription/yearly" class="button">Downgrade Subscription</a>
+        
         {% endif %}
       </div>
+      
+      {%if get_plan != "Demo Account"%}
+        <div>
+          <a href="/cancel/subscription" class="button">Cancel subscription</a>
+        </div>
+      {%endif%}
       <hr>
-      <div>
-        <a href="/cancel/subscription"><button>Cancel subscription</button></a>
-      </div>
 
     </div>
     <div class="activity">
@@ -50,5 +54,4 @@
     </div>
     
   </div>
-</body>
-</html>
+{%endblock%}
