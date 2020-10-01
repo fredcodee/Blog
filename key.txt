@@ -7,11 +7,3 @@ sk_test_51HMfihKZXGIOAX0RFNz6yGAb9VXU9cRpv1bkIxjpRjLs8NZvXg14mAYRi3E5pbqryteqdPW
 
 endpoint key
 whsec_AlCZzWqV9PIPWpwnpFYT7snN5EmrSHfJ
-
-
-authur
-wilfred@fredocde.com
-
-demo
-demoadmin@demo.com
-demoadmin
